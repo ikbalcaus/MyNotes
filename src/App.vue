@@ -3,9 +3,6 @@
     <RouterView />
 </template>
 
-<script>
-</script>
-
 <style>
     body {
         margin: 0;

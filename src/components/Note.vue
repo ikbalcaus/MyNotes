@@ -1,20 +1,32 @@
 <template>
-    <div>
-        <p>Note</p>
+    <div class="note" :style="{ backgroundColor: 'var(--' + color + '-500)' }">
+        <div class="text">
+            <p>{{ text }}</p>
+        </div>
     </div>
 </template>
 
-<script>
-    export default {
-        name: "Note"
-    }
+<script setup>
+    const props = defineProps({
+        text: String,
+        color: String
+    });
 </script>
 
 <style scoped>
-    div {
-        background-color: var(--blue-500);
-        width: 300px;
-        padding: 1px 20px;
+    .note {
+        width: 310px;
+        height: 310px;
         border-radius: 2px;
+        cursor: default;
+    }
+    .text {
+        padding: 1px 20px;
+        height: 290px;
+        overflow: hidden;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-size: 18px;
+        color: var(--primary-color-text);
     }
 </style>
