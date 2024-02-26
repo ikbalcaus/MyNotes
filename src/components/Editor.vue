@@ -2,20 +2,25 @@
     <div>
         <Textarea v-model="text" @input="sendParameters" class="textarea" placeholder="Type here..." autoResize spellcheck="false" />
         <Dropdown v-model="selectedColor" @change="sendParameters" class="dropdown" :options="colors" placeholder="Select a Color" :highlightOnSelect="false" />
-        <Button>Add note</Button>
+        <Button @click="saveChanges">{{ btnText }}</Button>
     </div>
 </template>
 
 <script setup>
-    import { defineEmits, ref } from 'vue';
+    import { defineProps, defineEmits, ref } from 'vue';
 
     const text = ref("");
     const selectedColor = ref("green");
     const colors = [ "green", "blue", "yellow", "red", "cyan", "pink", "teal", "orange", "purple", "gray" ];
+    const props = defineProps({ btnText: String });
+    const emits = defineEmits(["parameters", "btnClick"]);
 
-    const emits = defineEmits(["parameters"]);
     const sendParameters = () => {
         emits("parameters", text.value, selectedColor.value);
+    };
+
+    const saveChanges = () => {
+        emits("btnClick");
     };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <Splitter class="splitter" :layout="layout">
     <SplitterPanel :minSize="10">
-      <Editor class="editor" @parameters="applyParameters" />
+      <Editor class="editor" btn-text="Add note" @parameters="applyParameters" @btnClick="addNote" />
     </SplitterPanel>
     <SplitterPanel :minSize="10"> 
       <Note class="note" :text="text" :color="selectedColor" />
@@ -10,14 +10,16 @@
 </template>
 
 <script setup>
+  import { router } from '@/router';
   import { onMounted, ref } from 'vue';
 
   const layout = ref("");
   const text = ref("");
   const selectedColor = ref("green");
+  const notes = ref(JSON.parse(localStorage.getItem("notes")) || []);
 
   const checkSize = () => {
-    if(window.innerWidth < 992) layout.value = "vertical";
+    if(window.innerWidth <= 767) layout.value = "vertical";
     else layout.value = "horizontal";
   }
 
@@ -26,13 +28,24 @@
     selectedColor.value = newSelectedColor;
   };
 
+  const addNote = () => {
+    notes.value.push({
+      text: text.value,
+      color: selectedColor.value,
+      posX: Math.random() * 100,
+      posY: Math.random() * 100
+    });
+    localStorage.setItem("notes", JSON.stringify(notes.value));
+    router.push("/");
+  }
+
   onMounted(() => {
     checkSize();
     window.addEventListener("resize", checkSize);
   });
 </script>
 
-<style>
+<style scoped>
   .splitter {
     width: 100%;
     height: calc(100vh - 73px);
@@ -49,14 +62,5 @@
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
-  }
-
-  @media( max-width: 991px ) {
-    .splitter {
-      flex-direction: column;
-    }
-    .editor, .note {
-      top: 50%;
-    }
   }
 </style>

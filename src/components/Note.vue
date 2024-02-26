@@ -1,5 +1,5 @@
 <template>
-    <div class="note" :style="{ backgroundColor: 'var(--' + color + '-500)' }">
+    <div class="note" :style="`backgroundColor: var(--${color}-500)`">
         <div class="text">
             <p>{{ text }}</p>
         </div>
@@ -7,6 +7,8 @@
 </template>
 
 <script setup>
+    import { defineProps } from 'vue';
+
     const props = defineProps({
         text: String,
         color: String
