@@ -1,21 +1,23 @@
 <template>
     <div class="canvas">
-        <Note v-for="note in notes"
-            :text="note.text"
-            :color="note.color"
-        :style="`
-            position: absolute;
-            top: ${note.posY}%;
-            left: ${note.posX}%;
-            transform: translate(-${note.posX}%, -${note.posY}%);
+        <Note v-for="(note, index) in notes" :key="index"
+            :id = "note.id"
+            :text = "note.text"
+            :color = "note.color"
+            :enableButtons = "true"
+            :style="`
+                position: absolute;
+                top: ${note.posY}%;
+                left: ${note.posX}%;
+                transform: translate(-${note.posX}%, -${note.posY}%);
         `" />
     </div>
 </template>
     
 <script setup>
-    import { ref } from 'vue';
+    import { inject } from 'vue';
 
-    const notes = ref(JSON.parse(localStorage.getItem("notes")) || []);
+    const notes = inject("notes");
 </script>
 
 <style scoped>

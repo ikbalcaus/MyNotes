@@ -1,22 +1,22 @@
 <template>
-    <div>
-        <Textarea v-model="text" @input="sendParameters" class="textarea" placeholder="Type here..." autoResize spellcheck="false" />
-        <Dropdown v-model="selectedColor" @change="sendParameters" class="dropdown" :options="colors" placeholder="Select a Color" :highlightOnSelect="false" />
+    <div class="editor">
+        <Textarea v-model="text" @input="dataChanged" class="textarea" placeholder="Type here..." autoResize spellcheck="false" />
+        <Dropdown v-model="selectedColor" @change="dataChanged" class="dropdown" :options="colors" placeholder="Select a Color" :highlightOnSelect="false" />
         <Button @click="saveChanges">{{ btnText }}</Button>
     </div>
 </template>
 
 <script setup>
-    import { defineProps, defineEmits, ref } from 'vue';
+    import { ref } from 'vue';
 
     const text = ref("");
     const selectedColor = ref("green");
-    const colors = [ "green", "blue", "yellow", "red", "cyan", "pink", "teal", "orange", "purple", "gray" ];
+    const colors = [ "green", "blue", "red", "yellow", "orange", "purple", "pink", "cyan", "teal", "gray" ];
     const props = defineProps({ btnText: String });
-    const emits = defineEmits(["parameters", "btnClick"]);
+    const emits = defineEmits(["sendParameters", "btnClick"]);
 
-    const sendParameters = () => {
-        emits("parameters", text.value, selectedColor.value);
+    const dataChanged = () => {
+        emits("sendParameters", text.value, selectedColor.value);
     };
 
     const saveChanges = () => {
@@ -25,7 +25,7 @@
 </script>
 
 <style scoped>
-    div {
+    .editor {
         display: flex;
         flex-direction: column;
         gap: 10px;

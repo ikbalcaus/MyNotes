@@ -1,5 +1,12 @@
 <template>
-    <div class="note" :style="`backgroundColor: var(--${color}-500)`">
+    <div class="note"
+        :style="`backgroundColor: var(--${color}-500)`"
+        @mouseover="showButtons=true"
+        @mouseleave="showButtons=false">
+        <div v-if="enableButtons && showButtons" class="buttons">
+            <Button icon="pi pi-file-edit" @click="editNote()" class="note-btn" text />
+            <Button icon="pi pi-times" @click="deleteNote()" class="note-btn" text />
+        </div>
         <div class="text">
             <p>{{ text }}</p>
         </div>
@@ -7,12 +14,26 @@
 </template>
 
 <script setup>
-    import { defineProps } from 'vue';
+    import { inject, ref } from 'vue';
+    import { router } from '@/router';
 
+    const notes = inject("notes");
+    const showButtons = ref(false);
     const props = defineProps({
+        id: Number,
         text: String,
-        color: String
+        color: String,
+        enableButtons: Boolean
     });
+
+    const editNote = () => {
+        router.push("/edit/" + props.id);
+    }
+
+    const deleteNote = () => {
+        notes.value = notes.value.filter(note => note.id != props.id);
+        localStorage.setItem("notes", JSON.stringify(notes.value));
+    }
 </script>
 
 <style scoped>
@@ -21,6 +42,20 @@
         height: 310px;
         border-radius: 2px;
         cursor: default;
+        position: relative;
+    }
+    .buttons {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+    .note-btn {
+        width: 30px;
+        height: 30px;
+        color: var(--primary-color-text);
+    }
+    .note-btn:active {
+        background-color: transparent;
     }
     .text {
         padding: 1px 20px;

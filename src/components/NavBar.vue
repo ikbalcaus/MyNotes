@@ -18,7 +18,7 @@
     const navTextColor = ref("black");
     const navBorderColor = ref("#ccc");
 
-    const setTheme =  (change) => {
+    const setTheme = (change) => {
         if (change) theme.value = (theme.value == "light") ? "dark" : "light";
         if(theme.value == "light") {
             localStorage.setItem("theme", "light");

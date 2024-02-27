@@ -3,6 +3,12 @@
     <RouterView />
 </template>
 
+<script setup>
+    import { provide, ref } from 'vue';
+
+    provide("notes", ref(localStorage.getItem("notes") ? JSON.parse(localStorage.getItem("notes")) : []));
+</script>
+
 <style>
     body {
         margin: 0;

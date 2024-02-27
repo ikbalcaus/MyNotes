@@ -1,22 +1,22 @@
 <template>
   <Splitter class="splitter" :layout="layout">
     <SplitterPanel :minSize="10">
-      <Editor class="editor" btn-text="Add note" @parameters="applyParameters" @btnClick="addNote" />
+      <Editor class="editor" btn-text="Add note" @sendParameters="applyParameters" @btnClick="addNote" />
     </SplitterPanel>
     <SplitterPanel :minSize="10"> 
-      <Note class="note" :text="text" :color="selectedColor" />
+      <Note class="note" :enable-buttons="false" :text="text" :color="selectedColor" />
     </SplitterPanel>
   </Splitter>
 </template>
 
 <script setup>
   import { router } from '@/router';
-  import { onMounted, ref } from 'vue';
+  import { inject, onMounted, ref } from 'vue';
 
   const layout = ref("");
   const text = ref("");
   const selectedColor = ref("green");
-  const notes = ref(JSON.parse(localStorage.getItem("notes")) || []);
+  const notes = inject("notes");
 
   const checkSize = () => {
     if(window.innerWidth <= 767) layout.value = "vertical";
@@ -30,6 +30,7 @@
 
   const addNote = () => {
     notes.value.push({
+      id: (notes.value.length > 0) ? (notes.value[notes.value.length - 1].id + 1) : 1,
       text: text.value,
       color: selectedColor.value,
       posX: Math.random() * 100,
