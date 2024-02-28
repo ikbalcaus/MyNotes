@@ -1,8 +1,5 @@
 <template>
-    <div class="note"
-        :style="`backgroundColor: var(--${color}-500)`"
-        @mouseover="showButtons=true"
-        @mouseleave="showButtons=false">
+    <div class="note" :style="`backgroundColor: var(--${color}-500)`" @mouseover="showButtons=true" @mouseleave="showButtons=false">
         <div v-if="enableButtons && showButtons" class="buttons">
             <Button icon="pi pi-file-edit" @click="editNote()" class="note-btn" text />
             <Button icon="pi pi-times" @click="deleteNote()" class="note-btn" text />
@@ -15,8 +12,9 @@
 
 <script setup>
     import { inject, ref } from 'vue';
-    import { router } from '@/router';
+    import { useRouter } from 'vue-router';
 
+    const router = useRouter();
     const notes = inject("notes");
     const showButtons = ref(false);
     const props = defineProps({
@@ -53,6 +51,7 @@
         width: 30px;
         height: 30px;
         color: var(--primary-color-text);
+        opacity: 0.6;
     }
     .note-btn:active {
         background-color: transparent;

@@ -34,7 +34,7 @@
             navBorderColor.value = "#777";
             themeIcon.value = "pi pi-sun";
         }
-        document.getElementById("theme").setAttribute("href", "./node_modules/primevue/resources/themes/aura-" + theme.value + "-green/theme.css");
+        document.getElementById("theme").setAttribute("href", "./../node_modules/primevue/resources/themes/aura-" + theme.value + "-green/theme.css");
     }
 
     onMounted(() => {
@@ -71,7 +71,7 @@
         margin-right: 25px;
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
         .title {
             left: 0;
             transform: translate(0);

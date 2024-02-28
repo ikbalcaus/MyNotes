@@ -1,10 +1,11 @@
 <template>
     <div class="canvas">
         <Note v-for="(note, index) in notes" :key="index"
-            :id = "note.id"
-            :text = "note.text"
-            :color = "note.color"
-            :enableButtons = "true"
+            :id="note.id"
+            :text="note.text"
+            :color="note.color"
+            :enableButtons="true"
+            @mouseover="riseLayer(note.id)"
             :style="`
                 position: absolute;
                 top: ${note.posY}%;
@@ -18,6 +19,10 @@
     import { inject } from 'vue';
 
     const notes = inject("notes");
+
+    const riseLayer = (id) => {
+        
+    }
 </script>
 
 <style scoped>
