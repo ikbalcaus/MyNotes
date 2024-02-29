@@ -35,7 +35,8 @@
 			text: text.value,
 			color: selectedColor.value,
 			posX: Math.random() * 100,
-			posY: Math.random() * 100
+			posY: Math.random() * 100,
+			zIndex: notes.value.reduce((max, note) => Math.max(max, note.zIndex), 0) + 1
 		});
 		localStorage.setItem("notes", JSON.stringify(notes.value));
 		router.push("/");

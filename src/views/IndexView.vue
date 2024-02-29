@@ -11,17 +11,21 @@
                 top: ${note.posY}%;
                 left: ${note.posX}%;
                 transform: translate(-${note.posX}%, -${note.posY}%);
+                z-index: ${note.zIndex};
         `" />
     </div>
 </template>
-    
+
 <script setup>
     import { inject } from 'vue';
 
     const notes = inject("notes");
 
     const riseLayer = (id) => {
-        
+        let currentNote = notes.value.filter(note => note.id == id)[0];
+        let maxZIndex = notes.value.reduce((max, note) => Math.max(max, note.zIndex), 1) + 1;
+        currentNote.zIndex = maxZIndex;
+        localStorage.setItem("notes", JSON.stringify(notes.value));
     }
 </script>
 

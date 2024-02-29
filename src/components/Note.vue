@@ -41,6 +41,7 @@
         border-radius: 2px;
         cursor: default;
         position: relative;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
     .buttons {
         position: absolute;
