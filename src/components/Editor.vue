@@ -10,27 +10,27 @@
     import { onMounted, ref } from 'vue';
 
     const colors = [ "green", "blue", "red", "yellow", "orange", "purple", "pink", "cyan", "teal", "gray" ];
+    const text = ref();
+    const selectedColor = ref();
     const props = defineProps({
         text: String,
         color: String,
         btnText: String
     });
-    const text = ref();
-    const selectedColor = ref();
     const emits = defineEmits(["sendParameters", "btnClick"]);
 
     const dataChanged = () => {
         emits("sendParameters", text.value, selectedColor.value);
-    };
+    }
 
     const saveChanges = () => {
         emits("btnClick");
-    };
+    }
 
     onMounted(() => {
         text.value = props.text;
         selectedColor.value = props.color || "green";
-    })
+    });
 </script>
 
 <style scoped>

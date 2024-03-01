@@ -1,29 +1,34 @@
-# MyNotes
+# MyNotes - Notes Maker app
 
-This template should help get you started developing with Vue 3 in Vite.
+Web application built with Vue.js for taking notes
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
+
+#### Download [Node.js](https://nodejs.org/en), and install the necessary modules
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+#### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+#### Compile and Minify for Production
 
 ```sh
 npm run build
+cd dist
+serve
 ```
+
+## Support
+Star this repository :star:  
+Follow me on [Github](https://github.com/ikbalcaus) and [Linkedin](https://www.linkedin.com/in/ikbalcaus/)  
+Share this project with other people

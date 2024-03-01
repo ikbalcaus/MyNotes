@@ -14,20 +14,17 @@
     const theme = ref();
     const themeIcon = ref();
     const navBackgroundColor = ref();
-    const navTextColor = ref();
 
     const setTheme = (change) => {
-        if (change) theme.value = (theme.value == "light") ? "dark" : "light";
+        if(change) theme.value = (theme.value == "light") ? "dark" : "light";
         if(theme.value == "light") {
             localStorage.setItem("theme", "light");
             navBackgroundColor.value = "#f8f8f8";
-            navTextColor.value = "black";
             themeIcon.value = "pi pi-moon";
         }
         else {
             localStorage.setItem("theme", "dark");
             navBackgroundColor.value = "#141414";
-            navTextColor.value = "white";
             themeIcon.value = "pi pi-sun";
         }
         document.getElementById("theme").setAttribute("href", "./../node_modules/primevue/resources/themes/aura-" + theme.value + "-green/theme.css");
@@ -39,7 +36,7 @@
             setTheme(false);
         }
         else localStorage.setItem("theme", "light");
-    })
+    });
 </script>
 
 <style scoped>

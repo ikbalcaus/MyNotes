@@ -16,7 +16,7 @@
 
     const router = useRouter();
     const notes = inject("notes");
-    const showButtons = ref(false);
+    const showButtons = ref();
     const props = defineProps({
         id: Number,
         text: String,

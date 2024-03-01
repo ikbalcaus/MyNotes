@@ -22,6 +22,7 @@
 
 <script setup>
     import { ref, inject } from 'vue';
+    
     const notes = inject("notes");
     const currentNote = ref();
 

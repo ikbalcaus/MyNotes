@@ -9,25 +9,20 @@
 	</Splitter>
 </template>
 
-	<script setup>
+<script setup>
 	import { inject, onMounted, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+	import { useRouter } from 'vue-router';
 
-    const router = useRouter();
+	const router = useRouter();
 	const layout = ref();
 	const notes = inject("notes");
 	const text = ref();
 	const selectedColor = ref("green");
 
-	const checkSize = () => {
-		if(window.innerWidth <= 767) layout.value = "vertical";
-		else layout.value = "horizontal";
-	}
-
 	const applyParameters = (newText, newSelectedColor) => {
 		text.value = newText;
 		selectedColor.value = newSelectedColor;
-	};
+	}
 
 	const addNote = () => {
 		notes.value.push({
@@ -42,6 +37,7 @@
 		router.push("/");
 	}
 
+	const checkSize = () => { layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal"; }
 	onMounted(() => {
 		checkSize();
 		window.addEventListener("resize", checkSize);

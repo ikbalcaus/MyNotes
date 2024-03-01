@@ -11,9 +11,9 @@
 
 <script setup>
 	import { inject, onMounted, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+	import { useRouter } from 'vue-router';
 
-    const router = useRouter();
+	const router = useRouter();
 	const layout = ref();
 	const notes = inject("notes");
 	const currentNote = notes.value.filter(note => note.id == router.currentRoute.value.params.id)[0]
@@ -23,7 +23,7 @@
 	const applyParameters = (newText, newSelectedColor) => {
 		text.value = newText;
 		selectedColor.value = newSelectedColor;
-	};
+	}
 
 	const editNote = () => {
 		currentNote.text = text.value;
@@ -32,8 +32,10 @@
 		router.push("/");
 	}
 
+	const checkSize = () => { layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal"; }
 	onMounted(() => {
-		window.addEventListener("resize", () => { layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal"; });
+		checkSize();
+		window.addEventListener("resize", checkSize);
 	});
 </script>
 
