@@ -1,9 +1,9 @@
 <template>
     <nav>
-        <RouterLink to="/" class="title"><h1>MyNotes</h1></RouterLink>
+        <RouterLink to="/" class="title" v-tooltip.bottom="'Notes overview'"><h1>MyNotes</h1></RouterLink>
         <ul class="actions">
-            <li><RouterLink to="/new"><Button icon="pi pi-plus" rounded v-tooltip.left="'Create new note'" /></RouterLink></li>
-            <li><Button @click="setTheme(true)" :icon="themeIcon" rounded v-tooltip.left="'Change theme'" /></li>
+            <li><RouterLink to="/new"><Button icon="pi pi-plus" class="nav-btn" rounded v-tooltip.left="'Create new note'" /></RouterLink></li>
+            <li><Button @click="setTheme(true)" :icon="themeIcon" class="nav-btn" rounded v-tooltip.left="'Change theme'" /></li>
         </ul>
     </nav>
 </template>
@@ -11,12 +11,10 @@
 <script setup>
     import { onMounted, ref } from 'vue';
 
-    const theme = ref("light");
-    const themeIcon = ref("pi pi-moon");
-    
-    const navBackgroundColor = ref("#f8f8f8");
-    const navTextColor = ref("black");
-    const navBorderColor = ref("#ccc");
+    const theme = ref();
+    const themeIcon = ref();
+    const navBackgroundColor = ref();
+    const navTextColor = ref();
 
     const setTheme = (change) => {
         if (change) theme.value = (theme.value == "light") ? "dark" : "light";
@@ -24,14 +22,12 @@
             localStorage.setItem("theme", "light");
             navBackgroundColor.value = "#f8f8f8";
             navTextColor.value = "black";
-            navBorderColor.value = "#ccc";
             themeIcon.value = "pi pi-moon";
         }
         else {
             localStorage.setItem("theme", "dark");
-            navBackgroundColor.value = "#121216";
+            navBackgroundColor.value = "#141414";
             navTextColor.value = "white";
-            navBorderColor.value = "#777";
             themeIcon.value = "pi pi-sun";
         }
         document.getElementById("theme").setAttribute("href", "./../node_modules/primevue/resources/themes/aura-" + theme.value + "-green/theme.css");
@@ -49,11 +45,15 @@
 <style scoped>
     nav {
         background-color: v-bind(navBackgroundColor);
-        border-bottom: 1px solid v-bind(navBorderColor);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        user-select: none;
+    }
+    .nav-btn {
+        box-shadow: -1px 1px 8px rgba(0, 150, 100, 0.35)
     }
     .title {
         color: v-bind(navTextColor);

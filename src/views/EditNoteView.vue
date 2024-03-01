@@ -20,11 +20,6 @@
 	const text = ref(currentNote.text);
 	const selectedColor = ref(currentNote.color);
 
-	const checkSize = () => {
-		if(window.innerWidth <= 767) layout.value = "vertical";
-		else layout.value = "horizontal";
-	}
-
 	const applyParameters = (newText, newSelectedColor) => {
 		text.value = newText;
 		selectedColor.value = newSelectedColor;
@@ -38,8 +33,7 @@
 	}
 
 	onMounted(() => {
-		checkSize();
-		window.addEventListener("resize", checkSize);
+		window.addEventListener("resize", () => { layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal"; });
 	});
 </script>
 

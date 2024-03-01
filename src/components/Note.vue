@@ -41,7 +41,7 @@
         border-radius: 2px;
         cursor: default;
         position: relative;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
     }
     .buttons {
         position: absolute;
@@ -52,7 +52,7 @@
         width: 30px;
         height: 30px;
         color: var(--primary-color-text);
-        opacity: 0.6;
+        opacity: 0.7;
     }
     .note-btn:active {
         background-color: transparent;
@@ -65,5 +65,6 @@
         white-space: pre-wrap;
         font-size: 18px;
         color: var(--primary-color-text);
+        user-select: none;
     }
 </style>

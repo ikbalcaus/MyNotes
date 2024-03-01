@@ -19,7 +19,6 @@
     const selectedColor = ref();
     const emits = defineEmits(["sendParameters", "btnClick"]);
 
-
     const dataChanged = () => {
         emits("sendParameters", text.value, selectedColor.value);
     };
