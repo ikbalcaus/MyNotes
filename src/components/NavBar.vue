@@ -27,15 +27,13 @@
             navBackgroundColor.value = "#141414";
             themeIcon.value = "pi pi-sun";
         }
-        document.getElementById("theme").setAttribute("href", "./../node_modules/primevue/resources/themes/aura-" + theme.value + "-green/theme.css");
+        document.getElementById("theme").setAttribute("href", "/aura-" + theme.value + "-green/theme.css");
     }
 
     onMounted(() => {
-        if(localStorage.getItem("theme")) {
-            theme.value = localStorage.getItem("theme");
-            setTheme(false);
-        }
-        else localStorage.setItem("theme", "light");
+        if(!localStorage.getItem("theme")) localStorage.setItem("theme", "light");
+        theme.value = localStorage.getItem("theme");
+        setTheme(false);
     });
 </script>
 
