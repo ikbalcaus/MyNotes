@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-	import { inject, onMounted, ref } from 'vue';
+	import { inject, onMounted, onUnmounted, ref } from 'vue';
 	import { useRouter } from 'vue-router';
 
 	const router = useRouter();
@@ -36,6 +36,9 @@
 	onMounted(() => {
 		checkSize();
 		window.addEventListener("resize", checkSize);
+	});
+	onUnmounted(() => {
+		window.removeEventListener("resize", checkSize);
 	});
 </script>
 
