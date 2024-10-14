@@ -1,23 +1,34 @@
 <template>
     <nav>
-        <RouterLink to="/" class="title" v-tooltip.bottom="'Notes overview'"><h1>MyNotes</h1></RouterLink>
+        <RouterLink to="/" class="title" v-tooltip.bottom="'View all notes'">
+            <h1>MyNotes</h1>
+        </RouterLink>
         <ul class="actions">
-            <li><RouterLink to="/new"><Button icon="pi pi-plus" class="nav-btn" rounded v-tooltip.left="'Create new note'" /></RouterLink></li>
-            <li><Button @click="setTheme(true)" :icon="themeIcon" class="nav-btn" rounded v-tooltip.left="'Change theme'" /></li>
+            <li>
+                <RouterLink to="/new">
+                    <Button icon="pi pi-plus" class="nav-btn" rounded v-tooltip.left="'Create new note'" />
+                </RouterLink>
+            </li>
+            <li>
+                <Button class="nav-btn" rounded v-tooltip.left="'Change theme'"
+                    :icon="themeIcon"
+                    @click="setTheme(true)"
+                />
+            </li>
         </ul>
     </nav>
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref } from "vue";
 
     const theme = ref();
     const themeIcon = ref();
     const navBackgroundColor = ref();
 
-    const setTheme = (change) => {
-        if(change) theme.value = (theme.value == "light") ? "dark" : "light";
-        if(theme.value == "light") {
+    const setTheme = (changed) => {
+        if (changed) theme.value = (theme.value == "light") ? "dark" : "light";
+        if (theme.value == "light") {
             localStorage.setItem("theme", "light");
             navBackgroundColor.value = "#f8f8f8";
             themeIcon.value = "pi pi-moon";
@@ -31,7 +42,7 @@
     }
 
     onMounted(() => {
-        if(!localStorage.getItem("theme")) localStorage.setItem("theme", "light");
+        if (!localStorage.getItem("theme")) localStorage.setItem("theme", "light");
         theme.value = localStorage.getItem("theme");
         setTheme(false);
     });

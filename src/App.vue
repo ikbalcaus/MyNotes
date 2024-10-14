@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-    import { provide, ref } from 'vue';
+    import { provide, ref } from "vue";
 
     provide("notes", ref(JSON.parse(localStorage.getItem("notes")) || []));
 </script>

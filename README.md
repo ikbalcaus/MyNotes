@@ -1,10 +1,6 @@
 # MyNotes - Notes Maker app
 
-Web application built with Vue.js for taking notes
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Simple web application built with Vue.js for taking notes
 
 ## Project Setup
 

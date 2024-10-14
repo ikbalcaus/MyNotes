@@ -1,8 +1,8 @@
 <template>
-    <div class="note" :style="`backgroundColor: var(--${color}-500)`" @mouseover="showButtons=true" @mouseleave="showButtons=false">
-        <div v-if="enableButtons && showButtons" class="buttons">
-            <Button icon="pi pi-file-edit" @click="editNote()" class="note-btn" text />
-            <Button icon="pi pi-times" @click="deleteNote()" class="note-btn" text />
+    <div class="note" :style="`backgroundColor: var(--${color}-500)`">
+        <div v-if="showButtons" class="buttons">
+            <Button icon="pi pi-file-edit" class="note-btn" text @click="editNote()" />
+            <Button icon="pi pi-times" class="note-btn" text @click="deleteNote()" />
         </div>
         <div class="text">
             <p>{{ text }}</p>
@@ -11,17 +11,16 @@
 </template>
 
 <script setup>
-    import { inject, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { inject } from "vue";
+    import { useRouter } from "vue-router";
 
     const router = useRouter();
     const notes = inject("notes");
-    const showButtons = ref();
     const props = defineProps({
         id: Number,
         text: String,
         color: String,
-        enableButtons: Boolean
+        showButtons: Boolean
     });
 
     const editNote = () => {

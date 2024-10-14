@@ -1,17 +1,24 @@
 <template>
 	<Splitter class="splitter" :layout="layout">
-		<SplitterPanel :size="55" :minSize="10">
-			<Editor class="editor" btn-text="Add note" @sendParameters="applyParameters" @btnClick="addNote" />
+		<SplitterPanel :size="50" :minSize="10">
+			<Editor class="editor" btn-text="Add note"
+				@sendParameters="applyParameters"
+				@btnClick="addNote"
+			/>
 		</SplitterPanel>
-		<SplitterPanel :size="45" :minSize="10"> 
-			<Note class="note" :text="text" :color="selectedColor" :enable-buttons="false" />
+		<SplitterPanel :size="50" :minSize="10"> 
+			<Note class="note"
+				:text="text"
+				:color="selectedColor"
+				:enable-buttons="false"
+			/>
 		</SplitterPanel>
 	</Splitter>
 </template>
 
 <script setup>
-	import { inject, onMounted, onUnmounted, ref } from 'vue';
-	import { useRouter } from 'vue-router';
+	import { inject, onMounted, onUnmounted, ref } from "vue";
+	import { useRouter } from "vue-router";
 
 	const router = useRouter();
 	const layout = ref();

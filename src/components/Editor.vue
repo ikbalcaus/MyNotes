@@ -1,13 +1,18 @@
 <template>
     <div class="editor">
-        <Textarea v-model="text" @input="dataChanged" class="textarea" placeholder="Type here..." autoResize spellcheck="false" />
-        <Dropdown v-model="selectedColor" @change="dataChanged" class="dropdown" :options="colors" placeholder="Select a Color" :highlightOnSelect="false" />
+        <Textarea v-model="text" class="textarea" placeholder="Type here..." autoResize spellcheck="false"
+            @input="data"
+        />
+        <Dropdown v-model="selectedColor" class="dropdown" placeholder="Select a Color" :highlightOnSelect="false"
+            :options="colors"
+            @change="data"
+        />
         <Button @click="saveChanges">{{ btnText }}</Button>
     </div>
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref } from "vue";
 
     const colors = [ "green", "blue", "red", "yellow", "orange", "purple", "pink", "cyan", "teal", "gray" ];
     const text = ref();
@@ -19,7 +24,7 @@
     });
     const emits = defineEmits(["sendParameters", "btnClick"]);
 
-    const dataChanged = () => {
+    const data = () => {
         emits("sendParameters", text.value, selectedColor.value);
     }
 
