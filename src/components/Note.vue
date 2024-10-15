@@ -14,14 +14,14 @@
     import { inject } from "vue";
     import { useRouter } from "vue-router";
 
-    const router = useRouter();
-    const notes = inject("notes");
     const props = defineProps({
         id: Number,
         text: String,
         color: String,
         showButtons: Boolean
     });
+    const router = useRouter();
+    const notes = inject("notes");
 
     const editNote = () => {
         router.push("/edit/" + props.id);

@@ -12,17 +12,17 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from "vue";
+    import { ref } from "vue";
 
-    const colors = [ "green", "blue", "red", "yellow", "orange", "purple", "pink", "cyan", "teal", "gray" ];
-    const text = ref();
-    const selectedColor = ref();
     const props = defineProps({
         text: String,
         color: String,
         btnText: String
     });
     const emits = defineEmits(["sendParameters", "btnClick"]);
+    const colors = [ "green", "blue", "red", "yellow", "orange", "purple", "pink", "cyan", "teal", "gray" ];
+    const text = ref(props.text);
+    const selectedColor = ref(props.color || "green");
 
     const data = () => {
         emits("sendParameters", text.value, selectedColor.value);
@@ -31,11 +31,6 @@
     const saveChanges = () => {
         emits("btnClick");
     }
-
-    onMounted(() => {
-        text.value = props.text;
-        selectedColor.value = props.color || "green";
-    });
 </script>
 
 <style scoped>

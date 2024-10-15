@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from "vue";
+    import { ref, onMounted } from "vue";
 
     const theme = ref();
     const themeIcon = ref();

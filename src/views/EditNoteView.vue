@@ -5,7 +5,7 @@
 				:text="text"
 				:color="selectedColor"
 				@sendParameters="applyParameters"
-				@btnClick="editNote"
+				@btnClick="router.currentRoute.value.path == '/new' ? addNote() : editNote()"
 			/>
 		</SplitterPanel>
 		<SplitterPanel :size="50" :minSize="10"> 
@@ -19,19 +19,32 @@
 </template>
 
 <script setup>
-	import { inject, onMounted, onUnmounted, ref } from "vue";
+	import { ref, inject, onMounted, onUnmounted } from "vue";
 	import { useRouter } from "vue-router";
 
 	const router = useRouter();
 	const layout = ref();
 	const notes = inject("notes");
-	const currentNote = notes.value.filter(note => note.id == router.currentRoute.value.params.id)[0]
-	const text = ref(currentNote.text);
-	const selectedColor = ref(currentNote.color);
+	const currentNote = notes.value.filter(note => note.id == router.currentRoute.value.params.id)[0];
+	const text = ref(currentNote ? currentNote.text : "");
+	const selectedColor = ref(currentNote ? currentNote.color : "green");
 
 	const applyParameters = (newText, newSelectedColor) => {
 		text.value = newText;
 		selectedColor.value = newSelectedColor;
+	}
+
+	const addNote = () => {
+		notes.value.push({
+			id: (notes.value.length > 0) ? (notes.value[notes.value.length - 1].id + 1) : 1,
+			text: text.value,
+			color: selectedColor.value,
+			posX: Math.random() * 100,
+			posY: Math.random() * 100,
+			zIndex: notes.value.reduce((max, note) => Math.max(max, note.zIndex), 0) + 1
+		});
+		localStorage.setItem("notes", JSON.stringify(notes.value));
+		router.push("/");
 	}
 
 	const editNote = () => {
@@ -54,7 +67,7 @@
 <style scoped>
 	.splitter {
 		width: 100%;
-		height: calc(100vh - 73px);
+		height: calc(100vh - 72px);
 		border: none;
 	}
 	.editor {
