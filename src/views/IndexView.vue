@@ -62,6 +62,7 @@
             clientY = event.clientY;
         }
         else if (event.type === "touchmove") {
+            event.preventDefault();
             clientX = event.touches[0].clientX;
             clientY = event.touches[0].clientY;
         }
