@@ -1,5 +1,5 @@
 <template>
-	<Splitter class="splitter" :layout="layout">
+	<Splitter class="splitter" :layout="layout" @touchmove="preventDefault">
 		<SplitterPanel :size="50" :minSize="10">
 			<Editor class="editor" btn-text="Edit note"
 				:text="text"
@@ -54,7 +54,14 @@
 		router.push("/");
 	}
 
-	const checkSize = () => { layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal"; }
+	const preventDefault = (event) => {
+		event.preventDefault();
+	};
+
+	const checkSize = () => {
+		layout.value = (window.innerWidth <= 767) ? "vertical" : "horizontal";
+	}
+
 	onMounted(() => {
 		checkSize();
 		window.addEventListener("resize", checkSize);

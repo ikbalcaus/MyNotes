@@ -58,7 +58,7 @@
     }
     .text {
         padding: 1px 20px;
-        height: 290px;
+        height: 285px;
         overflow: hidden;
         word-wrap: break-word;
         white-space: pre-wrap;
